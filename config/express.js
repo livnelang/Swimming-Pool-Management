@@ -23,6 +23,18 @@ module.exports = function() {
         next();
     });
 
+    app.use('./public/js', express.static(__dirname + '/js'));
+    // app.use('/css', express.static(__dirname + '/css'));
+    app.use('./public/views', express.static(__dirname + '/views'));
+
+
+
+
+    app.get('/', function(req, res){
+        console.log('main entrance');
+        res.sendFile('index.html', { root: "./public" });
+    });
+
     // Load the routing files
     // require('../app/routes/users.routes.js')(app);
 
