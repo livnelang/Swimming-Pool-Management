@@ -1,0 +1,33 @@
+#wrapper {
+    margin: 0 auto;
+    margin-top: 25px;
+    width: 65%;
+}
+
+header {
+    height: 150px;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 25px;
+}
+
+header img {
+    height: 130px;
+    width: 200px;
+    display: block;
+    margin: 0 auto;
+}
+
+
+.menuContainer {
+    height: 171px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menuContainer button {
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+}

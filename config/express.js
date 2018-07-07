@@ -23,9 +23,9 @@ module.exports = function() {
         next();
     });
 
-    app.use('./public/js', express.static(__dirname + '/js'));
+    app.use(express.static('./public'));
     // app.use('/css', express.static(__dirname + '/css'));
-    app.use('./public/views', express.static(__dirname + '/views'));
+    // app.use('./public/views', express.static(__dirname + '/views'));
 
 
 
