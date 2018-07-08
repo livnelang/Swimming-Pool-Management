@@ -59,8 +59,6 @@ var Clients = require('mongoose').model('Client');
  * @param res
  */
 exports.addClient = function (req,res)  {
-    console.log('/addClient arrived');
-    console.log(req.body.newClient);
     res.set("Content-Type", "application/json");
     var newClient = new Clients(req.body.newClient);
     newClient.save(function(err, new_doc){
