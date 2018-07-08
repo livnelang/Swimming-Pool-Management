@@ -8,7 +8,8 @@ module.exports = function() {
 
     db = mongoose.connection;
     //Load the application models
-    // require('../app/models/users.model');
+
+    require('../server/models/client.model');
 
     //Return the Mongoose connection instance
     return db;

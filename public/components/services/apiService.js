@@ -2,12 +2,13 @@ myApp
     .service("apiService", ["$http", "$q", function ($http, $q) {
 
         return {
-            addClient:function(){
+            addClient:function(newClient){
                 return $http({
                     method: "POST",
-                    url: "/api/domains/addClient",
-                    data: {}
-
+                    url: "/api/addClient",
+                    data: {
+                        newClient: newClient
+                    }
                 });
             },
             remove:function (id) {
