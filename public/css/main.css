@@ -9,6 +9,7 @@ header {
     margin: 0 auto;
     display: block;
     margin-bottom: 25px;
+    cursor: pointer;
 }
 
 header img {
@@ -33,15 +34,15 @@ header img {
     width: 200px;
 }
 
-
-/* Add Client Part */
-
-.addClientContainer label {
+.addContainer label {
     float: right;
     direction: rtl;
 }
 
-.addClientContainer #addClientButton {
+
+/* Add Client Part */
+
+.addButton {
     display: block;
     margin: auto;
 }

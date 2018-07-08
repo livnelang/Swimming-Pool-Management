@@ -18,7 +18,8 @@ myApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
             controller: 'addClientController'
         })
         .state('addOrder', {
-            url: '/addOrder/',
-            template: '<edit-user></edit-user>'
+            url: '/addOrder',
+            templateUrl: 'components/addOrder/addOrder.html',
+            controller: 'addOrderController'
         })
 });

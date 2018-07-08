@@ -11,6 +11,24 @@ myApp
                     }
                 });
             },
+            addOrder:function(newOrder){
+                return $http({
+                    method: "POST",
+                    url: "/api/addOrder",
+                    data: {
+                        newOrder: newOrder
+                    }
+                });
+            },
+            getClients:function(searchText){
+                return $http({
+                    method: "POST",
+                    url: "/api/getClients",
+                    data: {
+                        clientSearchText: searchText
+                    }
+                });
+            },
             remove:function (id) {
 
                 return $http({
