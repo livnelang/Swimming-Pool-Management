@@ -18,6 +18,7 @@ header img {
     margin: 0 auto;
 }
 
+/* Menu Part */
 
 .menuContainer {
     height: 171px;
@@ -30,4 +31,17 @@ header img {
     display: block;
     margin: 0 auto;
     width: 200px;
+}
+
+
+/* Add Client Part */
+
+.addClientContainer label {
+    float: right;
+    direction: rtl;
+}
+
+.addClientContainer #addClientButton {
+    display: block;
+    margin: auto;
 }

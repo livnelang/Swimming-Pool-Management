@@ -12,12 +12,13 @@ myApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
             templateUrl: 'components/menu/menu.html',
             controller: 'menuController'
         })
-        // .state('addClient', {
-        //     url: '/addClient/',
-        //     template: '<edit-user></edit-user>'
-        // })
-        // .state('addOrder', {
-        //     url: '/addOrder/',
-        //     template: '<edit-user></edit-user>'
-        // })
+        .state('addClient', {
+            url: '/addClient',
+            templateUrl: 'components/addClient/addClient.html',
+            controller: 'addClientController'
+        })
+        .state('addOrder', {
+            url: '/addOrder/',
+            template: '<edit-user></edit-user>'
+        })
 });
