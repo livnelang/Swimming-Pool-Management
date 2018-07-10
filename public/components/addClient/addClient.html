@@ -17,3 +17,14 @@
 
     <button ng-disabled="isLoading" type="button" id="addClientButton" ng-click="addClient()" class="btn btn-success addButton">הוסף</button>
 </div>
+
+
+
+<!--addOrderDialog-->
+<script type="text/ng-template" id="addClientTemplateId">
+    <div class="orderDialogContainer">
+        <h1>{{orderHeader}}</h1>
+        <p>{{orderMessage}}</p>
+        <img ng-if="orderStatus == '200'" src="../../images/orderSuccess.gif"/>
+    </div>
+</script>

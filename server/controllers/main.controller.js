@@ -69,8 +69,12 @@ exports.addClient = function (req,res)  {
             res.json(new_doc);
         }
         else {
-            console.log(err);
-            res.status(500).json(err);
+            if (err.code === 11000) {
+                res.status(500).json({message: "מספר החשבון כבר קיים"});
+            }
+            else{
+                res.status(500).json(err);
+            }
         }
     });
 };

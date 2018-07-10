@@ -1,4 +1,4 @@
-myApp.controller('addClientController',['$scope', 'apiService', function ($scope, apiService) {
+myApp.controller('addClientController',['$scope', 'apiService', 'ngDialog', '$state', function ($scope, apiService, ngDialog, $state) {
 
     $scope.newClient = {};
 
@@ -8,10 +8,32 @@ myApp.controller('addClientController',['$scope', 'apiService', function ($scope
         apiService.addClient($scope.newClient).then(
             function (response) {
                 $scope.isLoading = false;
+                $scope.orderHeader = "יש לקוח חדש!";
+
+                openOrderDialog();
             },
             function (error) {
                 $scope.isLoading = false;
-                console.log(error);
+
+                $scope.orderHeader = "ההוספה נכשלה";
+                $scope.orderMessage = error.data.message;
+                openOrderDialog();
             });
+    };
+
+
+    function openOrderDialog() {
+        ngDialog.open({
+            template: 'addClientTemplateId',
+            scope: $scope,
+            preCloseCallback:function(){
+                $scope.newOrder = {};
+                $scope.orderMessage = "";
+                $scope.orderStatus = "";
+
+                $state.go('menu');
+            }
+
+        });
     }
 }]);

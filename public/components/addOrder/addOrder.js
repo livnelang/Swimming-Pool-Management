@@ -1,4 +1,4 @@
-myApp.controller('addOrderController', ['$scope', 'apiService','ngDialog', function ($scope, apiService, ngDialog) {
+myApp.controller('addOrderController', ['$scope', 'apiService','ngDialog','$state', function ($scope, apiService, ngDialog, $state) {
 
     $scope.products = ['קרטיב', 'בירה', 'קולה'];
     $scope.newOrder = {};
@@ -38,7 +38,6 @@ myApp.controller('addOrderController', ['$scope', 'apiService','ngDialog', funct
                     $scope.searchResult = response.data;
                 },
                 function (error) {
-                    console.log(error);
                 });
 
         } else {
@@ -63,12 +62,14 @@ myApp.controller('addOrderController', ['$scope', 'apiService','ngDialog', funct
 
     function openOrderDialog() {
         ngDialog.open({
-            template: 'templateId',
+            template: 'addOrderTemplateId',
             scope: $scope,
             preCloseCallback:function(){
                 $scope.newOrder = {};
                 $scope.orderMessage = "";
                 $scope.orderStatus = "";
+
+                $state.go('menu');
             }
 
         });
