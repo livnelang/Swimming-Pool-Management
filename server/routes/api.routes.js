@@ -1,5 +1,5 @@
 // Load the module dependencies/*
-var clients = require('../../server/controllers/clients.controller');
+var clients = require('../../server/controllers/main.controller');
 
 // Define users routes module
 module.exports = function(app) {

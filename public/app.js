@@ -1,4 +1,4 @@
-var myApp = angular.module("myApp",['ui.router']);
+var myApp = angular.module("myApp",['ui.router', 'ngDialog']);
 
 myApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 

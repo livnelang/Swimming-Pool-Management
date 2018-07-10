@@ -9,6 +9,8 @@ header {
     margin: 0 auto;
     display: block;
     margin-bottom: 25px;
+}
+header img {
     cursor: pointer;
 }
 
@@ -17,6 +19,10 @@ header img {
     width: 200px;
     display: block;
     margin: 0 auto;
+}
+
+input, select, ul, .ngdialog-content {
+    direction: rtl;
 }
 
 /* Menu Part */
@@ -45,4 +51,35 @@ header img {
 .addButton {
     display: block;
     margin: auto;
+}
+
+/* Add Order Part */
+
+.addOrderContainer ul {
+    list-style: none;
+    padding: 0;
+    overflow-y: scroll;
+    max-height: 150px;
+}
+
+#searchResult li{
+    background: lavender;
+    padding: 4px;
+    margin-bottom: 1px;
+}
+
+#searchResult li:nth-child(even){
+    background: cadetblue;
+    color: white;
+}
+
+#searchResult li:hover{
+    cursor: pointer;
+}
+
+.orderDialogContainer img {
+    width: 200px;
+    height: 150px;
+    display: block;
+    margin: 0 auto;
 }

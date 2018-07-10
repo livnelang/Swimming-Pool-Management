@@ -7,9 +7,12 @@
     <!--CSS-->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/ngDialog.min.css">
+    <link rel="stylesheet" href="css/ngDialog-theme-default.min.css">
     <!--&lt;!&ndash;JS&ndash;&gt;-->
     <script type="text/javascript" src="js/angular.min.js"></script>
     <script type="text/javascript" src="js/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="js/ngDialog.min.js"></script>
 
     <!--App -->
     <script type="text/javascript" src="./app.js"></script>
@@ -27,8 +30,8 @@
 <!-- wrapper  -->
 <div id="wrapper">
     <!--navigation-bar -->
-    <header ui-sref="menu">
-        <img src="/images/pool.png"/>
+    <header>
+        <img ui-sref="menu" src="/images/pool.png"/>
     </header>
     <!-- main  -->
     <main ui-view>
