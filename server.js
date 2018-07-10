@@ -9,6 +9,7 @@ var db = mongoose();
 var app = express();
 // create a http module from express
 
+console.log(app.get('superSecret'));
 
 
 

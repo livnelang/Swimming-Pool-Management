@@ -1,5 +1,6 @@
 // Load the module dependencies/*
 var clients = require('../../server/controllers/main.controller');
+var authenticate = require('../../server/controllers/authenticate.controller');
 
 // Define users routes module
 module.exports = function(app) {
@@ -8,6 +9,10 @@ module.exports = function(app) {
     app.post('/api/addClient', clients.addClient);
     app.post('/api/addOrder', clients.addOrder);
     app.post('/api/getClients', clients.getClients);
+
+    // authentication routes
+    app.post('/api/authenticate', authenticate.authenticate);
+
     // app.post('/createUser', users.createUser);
     // app.post('/deleteUser', users.deleteUser);
 };
