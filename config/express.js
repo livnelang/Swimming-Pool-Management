@@ -32,7 +32,7 @@ module.exports = function() {
 
     app.get('/', function(req, res){
         console.log('main entrance');
-        res.sendFile('index.html', { root: "./public" });
+        res.sendFile('index.html', { root: "../public" });
     });
 
     // Load the routing files
