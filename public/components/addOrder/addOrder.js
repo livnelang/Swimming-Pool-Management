@@ -1,7 +1,9 @@
-myApp.controller('addOrderController', ['$scope', 'apiService','ngDialog','$state', function ($scope, apiService, ngDialog, $state) {
+myApp.controller('addOrderController', ['$scope', 'apiService','ngDialog','$state', '$filter', function ($scope, apiService, ngDialog, $state, $filter) {
 
     $scope.products = ['קרטיב', 'בירה', 'קולה'];
     $scope.newOrder = {};
+
+    $scope.newOrder.date = new Date($filter("date")(Date.now(), 'yyyy-MM-dd'));
 
     $scope.addOrder = function () {
 

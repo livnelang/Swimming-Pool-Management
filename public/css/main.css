@@ -1,7 +1,7 @@
 #wrapper {
     margin: 0 auto;
     margin-top: 25px;
-    width: 65%;
+    width: 70%;
 }
 
 header {
@@ -83,3 +83,40 @@ input, select, ul, .ngdialog-content {
     display: block;
     margin: 0 auto;
 }
+
+
+
+
+/* Orders Part */
+.ordersFilterRow {
+    direction: rtl;
+
+}
+
+.ordersDatesRow {
+
+}
+
+.ordersDate {
+    width: 120px;
+    display: inline-block;
+}
+
+.showOrdersButton{
+    display: block;
+    width: 100%;
+}
+
+
+
+input[type=date]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
+}
+
+input [placeholder] {
+    color: green;
+}
+
+
+

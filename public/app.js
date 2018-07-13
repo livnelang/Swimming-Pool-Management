@@ -22,4 +22,9 @@ myApp.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
             templateUrl: 'components/addOrder/addOrder.html',
             controller: 'addOrderController'
         })
+        .state('orders', {
+            url: '/orders',
+            templateUrl: 'components/orders/orders.html',
+            controller: 'ordersController'
+        })
 });
