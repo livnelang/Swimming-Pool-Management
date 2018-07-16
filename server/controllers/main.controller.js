@@ -8,54 +8,6 @@ var Clients = require('mongoose').model('Client');
 var Orders = require('mongoose').model('Order');
 
 /**
- * getUsers
- * get all users from db
- * @param req
- * @param res
- */
-// exports.getUsers = function (req,res)  {
-//     res.set("Content-Type", "application/json");
-//     Users.find({}).select({"_id": 0})
-//         .exec(function(err, users){
-//             if(err) {
-//                 res.json(err);
-//             }
-//             else {
-//                 res.json(users);
-//             }
-//         });
-// };
-//
-// /**
-//  * updateUser
-//  * updates requested user
-//  * @param req
-//  * @param res
-//  */
-// exports.updateUser = function (req,res)  {
-//     res.set("Content-Type", "application/json");
-//
-//     Users.findOne({id: req.body.user.id}, function(err, user) {
-//         if(!err) {
-//             user.name = req.body.user.name;
-//             user.password = req.body.user.password;
-//
-//             user.save(function(save_err) {
-//                 if(!save_err) {
-//                     res.status(200).json(user);
-//                 }
-//                 else {
-//                     res.status(500).json(save_err);
-//                 }
-//             });
-//         }
-//         else {
-//             res.json(err);
-//         }
-//     });
-// };
-
-/**
  * addClient
  * creates new client
  * @param req
@@ -82,7 +34,6 @@ exports.addClient = function (req,res)  {
 exports.getClients = function (req,res)  {
     res.set("Content-Type", "application/json");
     var clientSearchText =req.body.clientSearchText;
-
         Clients.find({firstName: {$regex: clientSearchText}}, function(err, clients) {
         if(!err) {
             res.status(200).json(clients);
@@ -91,7 +42,18 @@ exports.getClients = function (req,res)  {
             res.status(500).json(err);
         }
     });
+};
 
+exports.getAllClients = function (req,res)  {
+    res.set("Content-Type", "application/json");
+    Clients.find({}, function(err, clients) {
+        if(!err) {
+            res.status(200).json(clients);
+        }
+        else {
+            res.status(500).json(err);
+        }
+    });
 };
 
 exports.addOrder = function (req,res)  {
@@ -108,28 +70,53 @@ exports.addOrder = function (req,res)  {
     });
 };
 
-/**
- * deleteUser
- * deletes required user
- * @param req
- * @param res
- */
-// exports.deleteUser = function (req,res)  {
-//     res.set("Content-Type", "application/json");
+// exports.getOrders = function (req,res)  {
+//     var orderFilter = req.body.formObject;
+//     var startDate = new Date(orderFilter.date);
 //
-//     Users.findOne({id: req.body.user_id}, function(err, user) {
-//         if (!err) {
-//             user.remove(function(err, doc){
-//                 if(!err) {
-//                     res.json(doc);
-//                 }
-//                 else {
-//                     res.status(500).json(err);
-//                 }
-//             });
+//     console.log(req.body.formObject);
+//     res.set("Content-Type", "application/json");
+//     Orders.find({
+//         date: {
+//             $gte: orderFilter.date,
+//             $lt:  new Date(startDate.getFullYear(), startDate.getMonth()+1, 1)
+//         },
+//         accountNumber: orderFilter.clientAccountNumber
+//
+//     }, function(err, orders) {
+//         if(!err) {
+//             res.status(200).json(orders);
 //         }
 //         else {
 //             res.status(500).json(err);
 //         }
 //     });
 // };
+
+exports.getOrders = function (req,res)  {
+    var orderFilter = req.body.formObject;
+    var startDate = new Date(orderFilter.date);
+
+    console.log(req.body.formObject);
+    res.set("Content-Type", "application/json");
+    Orders.aggregate([
+            {
+                $lookup: {
+                    from: "clients",
+                    localField: "accountNumber",
+                    foreignField: "accountNumber",
+                    as: "fromItems"
+                }
+            },
+            { $match : { accountNumber : req.body.formObject.clientAccountNumber } },
+            {
+                $replaceRoot: { newRoot: { $mergeObjects: [ { $arrayElemAt: [ "$fromItems", 0 ] }, "$$ROOT" ] } }
+            },
+            { $project: { fromItems: 0 } }
+        ],
+        function(err, result){
+            console.log(result);
+            console.log(err);
+            res.status(200).json(result);
+        })
+};

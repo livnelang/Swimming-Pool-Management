@@ -3,40 +3,50 @@
 <!--filter row-->
     <div class="ordersFilterRow">
         <div class="form-group">
-            <label for="sel1">בחר לקוח:</label>
-            <select class="form-control" id="sel1">
-                <option value="allClients">כל הלקוחות</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
+            <label>בחר לקוח:</label>
+            <select ng-model="formObject.clientAccountNumber" class="form-control"
+                ng-options="client.accountNumber as client.firstName + ' ' + client.lastName for client in clients">
+                <!--<option ng-repeat="client in clients" value="{{client.accountNumber}}">{{client.firstName}} {{client.lastName}}</option>-->
             </select>
         </div>
 
         <div class="form-group">
-            <label for="sel1">בחר חודש:</label>
-            <select class="form-control">
-                <option ng-repeat="month in months" value="month.date">{{month.name}}</option>
+            <label>בחר חודש:</label>
+            <select ng-model="formObject.date" class="form-control"
+                ng-options="month.date as month.name for month in months">
             </select>
-        </div>
+    </div>
 
-        <!--<div class="ordersDatesRow">-->
-            <!--<div class="form-group ordersDate">-->
-                <!--<label>מתאריך:</label>-->
-                <!--<input type="date" class="form-control">-->
-            <!--</div>-->
-
-            <!--<div class="form-group ordersDate">-->
-                <!--<label>עד תאריך:</label>-->
-                <!--<input type="date" class="form-control">-->
-            <!--</div>-->
-        <!--</div>-->
-
-
-
-        <button type="button" class="btn btn-success showOrdersButton">הצג</button>
-
+        <button type="button" ng-click="showResults()" class="btn btn-success showOrdersButton">הצג</button>
     </div>
 
 
     <!--filter table-->
+    <div class="container ordersTable" ng-if="orders.length > 0">
+        <h2>Striped Rows</h2>
+        <p>The .table-striped class adds zebra-stripes to a table:</p>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>לקוח</th>
+                <th>מוצר</th>
+                <th>כמות</th>
+                <th>תאריך</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in orders">
+                <td>{{item.productName}}</td>
+                <td>{{item.productName}}</td>
+                <td>{{item.productName}}</td>
+                <td>{{item.productName}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <ul>
+        <li ng-repeat="item in orders">{{item.productName}}</li>
+    </ul>
 </div>

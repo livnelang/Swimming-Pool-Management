@@ -108,14 +108,8 @@ input, select, ul, .ngdialog-content {
 }
 
 
-
-input[type=date]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    display: none;
-}
-
-input [placeholder] {
-    color: green;
+.ordersTable {
+    direction: rtl;
 }
 
 

@@ -9,6 +9,9 @@ module.exports = function(app) {
     app.post('/api/addClient', clients.addClient);
     app.post('/api/addOrder', clients.addOrder);
     app.post('/api/getClients', clients.getClients);
+    app.post('/api/getAllClients', clients.getAllClients);
+
+    app.post('/api/getOrders', clients.getOrders);
 
     // authentication routes
     app.post('/api/authenticate', authenticate.authenticate);

@@ -29,13 +29,19 @@ myApp
                     }
                 });
             },
-            remove:function (id) {
-
+            getAllClients:function(){
                 return $http({
                     method: "POST",
-                    url: "/p/domains/remove",
-                    data: {id:id}
-
+                    url: "/api/getAllClients"
+                });
+            },
+            getOrders:function(formObject){
+                return $http({
+                    method: "POST",
+                    url: "/api/getOrders",
+                    data: {
+                        formObject: formObject
+                    }
                 });
             },
             upsert:function (item) {
