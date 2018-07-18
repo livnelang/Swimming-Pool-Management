@@ -84,7 +84,6 @@ exports.getOrders = function (req, res) {
 
     // if its a client only
     if (!orderFilter.isAllClients) {
-        console.log(orderFilter.clientAccountNumber);
         ordersQuery.accountNumber =  orderFilter.clientAccountNumber;
     }
 
