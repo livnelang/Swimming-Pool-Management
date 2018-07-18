@@ -4,7 +4,7 @@ myApp.controller('ordersController', ['$scope', 'apiService', 'ngDialog', '$stat
     $scope.clients = [];
     $scope.formObject = {};
     $scope.formObject.clientAccountNumber = {};
-    // $scope.clients[0] = {firstName: "כל הלקוחות", accountNumber: 99999};
+
     $scope.months = [
         {name: 'מאי', date: setMonthTime(4)},
         {name: 'יוני', date: setMonthTime(5)},
@@ -13,7 +13,8 @@ myApp.controller('ordersController', ['$scope', 'apiService', 'ngDialog', '$stat
         {name: 'ספטמבר', date: setMonthTime(8)},
         {name: 'אוקטובר', date: setMonthTime(9)}
     ];
-    $scope.formObject.date = $scope.months[0].date;
+    setCurrentMonth();
+
 
     apiService.getAllClients().then(
         function (response) {
@@ -47,6 +48,17 @@ myApp.controller('ordersController', ['$scope', 'apiService', 'ngDialog', '$stat
                 // console.log(error);
             });
     }
+
+    function setCurrentMonth() {
+        var currentDate = new Date();
+        for(var i = 0; i<$scope.months.length;i++) {
+            if(currentDate.getMonth() === $scope.months[i].date.getMonth()) {
+                $scope.formObject.date = $scope.months[i].date;
+                return;
+            }
+        }
+    }
+
 }]);
 
 

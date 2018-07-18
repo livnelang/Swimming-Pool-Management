@@ -9,6 +9,7 @@ myApp.controller('addClientController',['$scope', 'apiService', 'ngDialog', '$st
             function (response) {
                 $scope.isLoading = false;
                 $scope.orderHeader = "יש לקוח חדש!";
+                $scope.orderStatus = 200;
 
                 openOrderDialog();
             },
