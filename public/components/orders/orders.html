@@ -23,8 +23,6 @@
 
     <!--filter table-->
     <div class="container ordersTable" ng-if="orders.length > 0">
-        <h2>Striped Rows</h2>
-        <p>The .table-striped class adds zebra-stripes to a table:</p>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -35,18 +33,13 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="item in orders">
+            <tr ng-repeat="item in orders | orderBy: '-date'">
+                <td>{{item.firstName}} {{item.lastName}}</td>
                 <td>{{item.productName}}</td>
-                <td>{{item.productName}}</td>
-                <td>{{item.productName}}</td>
-                <td>{{item.productName}}</td>
+                <td>{{item.quantity}}</td>
+                <td class="timeCell">{{item.date | date:"MM/dd/yyyy 'at' h:mma"}}</td>
             </tr>
             </tbody>
         </table>
     </div>
-
-
-    <ul>
-        <li ng-repeat="item in orders">{{item.productName}}</li>
-    </ul>
 </div>

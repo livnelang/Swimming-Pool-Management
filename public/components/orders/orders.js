@@ -18,8 +18,8 @@ myApp.controller('ordersController', ['$scope', 'apiService', 'ngDialog', '$stat
     apiService.getAllClients().then(
         function (response) {
             $scope.clients = response.data;
-            $scope.clients.unshift({firstName: "כל הלקוחות", accountNumber: 99999});
-            $scope.formObject.clientAccountNumber =$scope.clients[0].accountNumber;
+            $scope.clients.unshift({firstName: "כל הלקוחות",accountNumber: "allClients"});
+            $scope.formObject.clientAccountNumber = $scope.clients[0].accountNumber;
         },
         function (error) {
             console.log(error);
@@ -35,6 +35,10 @@ myApp.controller('ordersController', ['$scope', 'apiService', 'ngDialog', '$stat
 
 
     $scope.showResults = function () {
+        if($scope.formObject.clientAccountNumber === "allClients") {
+            $scope.formObject.isAllClients =  true;
+        }
+
         apiService.getOrders($scope.formObject).then(
             function (response) {
                 $scope.orders = response.data;
