@@ -28,10 +28,16 @@ myApp.controller('ordersController', ['$scope', 'apiService', 'ngDialog', '$stat
 
 
     function setMonthTime(month) {
-        var d = new Date();
-        d.setHours(0, 0, 0, 0);
-        d.setMonth(month, 1);
-        return new Date(d);
+        var dateObj = {};
+
+        var st = new Date();
+        st.setHours(0, 0, 0, 0);
+        st.setMonth(month, 1);
+
+        dateObj.startDate = new Date(st);
+        dateObj.endDate = new Date(st.getFullYear(), st.getMonth() + 1, 1);
+
+        return dateObj;
     }
 
 
@@ -52,7 +58,7 @@ myApp.controller('ordersController', ['$scope', 'apiService', 'ngDialog', '$stat
     function setCurrentMonth() {
         var currentDate = new Date();
         for(var i = 0; i<$scope.months.length;i++) {
-            if(currentDate.getMonth() === $scope.months[i].date.getMonth()) {
+            if(currentDate.getMonth() === $scope.months[i].date.startDate.getMonth()) {
                 $scope.formObject.date = $scope.months[i].date;
                 return;
             }

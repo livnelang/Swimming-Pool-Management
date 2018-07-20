@@ -72,17 +72,16 @@ exports.addOrder = function (req, res) {
 
 exports.getOrders = function (req, res) {
     var orderFilter = req.body.formObject;
-    console.log('incoming date: ' + orderFilter.date);
     var startDate = new Date(orderFilter.date);
-    console.log('startDate: ' + startDate);
-    console.log('endDate: ' + new Date(startDate.getFullYear(), startDate.getMonth() + 1, 1));
+    console.log('startDate: ' + orderFilter.date.startDate);
+    console.log('endDate: ' + orderFilter.date.endDate);
     var ordersQuery = {};
     res.set("Content-Type", "application/json");
 
     // set the query date
     ordersQuery.date = {
-        $gte: orderFilter.date,
-        $lt: new Date(startDate.getFullYear(), startDate.getMonth() + 1, 1)
+        $gte: orderFilter.date.startDate,
+        $lt: orderFilter.date.endDate
     };
 
     // if its a client only
