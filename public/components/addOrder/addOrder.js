@@ -3,7 +3,7 @@ myApp.controller('addOrderController', ['$scope', 'apiService','ngDialog','$stat
     $scope.products = ['קרטיב', 'בירה', 'קולה'];
     $scope.newOrder = {};
 
-    $scope.newOrder.date = new Date($filter("date")(Date.now(), 'yyyy-MM-dd'));
+    $scope.newOrder.date = new Date($filter("date")(Date.now(), 'yyyy-MM-dd h:mm a'));
 
     $scope.addOrder = function () {
 
