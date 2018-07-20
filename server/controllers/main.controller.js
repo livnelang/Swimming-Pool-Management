@@ -72,9 +72,8 @@ exports.addOrder = function (req, res) {
 
 exports.getOrders = function (req, res) {
     var orderFilter = req.body.formObject;
+
     var startDate = new Date(orderFilter.date);
-    console.log('startDate: ' + orderFilter.date.startDate);
-    console.log('endDate: ' + orderFilter.date.endDate);
     var ordersQuery = {};
     res.set("Content-Type", "application/json");
 
@@ -85,10 +84,10 @@ exports.getOrders = function (req, res) {
     };
 
     // if its a client only
-    if (!orderFilter.isAllClients) {
-        ordersQuery.accountNumber =  orderFilter.clientAccountNumber;
+    if (!orderFilter.isAllClients || orderFilter.isAllClients === undefined) {
+        ordersQuery.accountNumber = undefined;
+        ordersQuery.accountNumber = orderFilter.clientAccountNumber;
     }
-
     Orders.find(ordersQuery, function (err, clients) {
         if (!err) {
             res.status(200).json(clients);

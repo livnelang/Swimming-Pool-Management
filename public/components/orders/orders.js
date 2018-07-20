@@ -43,7 +43,10 @@ myApp.controller('ordersController', ['$scope', 'apiService', 'ngDialog', '$stat
 
     $scope.showResults = function () {
         if($scope.formObject.clientAccountNumber === "allClients") {
-            $scope.formObject.isAllClients =  true;
+            $scope.formObject.isAllClients = true;
+        }
+        else {
+            $scope.formObject.isAllClients = false;
         }
 
         apiService.getOrders($scope.formObject).then(
