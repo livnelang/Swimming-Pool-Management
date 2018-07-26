@@ -3,7 +3,7 @@
 /* Controllers */
 
 myApp
-    .controller('signInController', ['$rootScope', '$scope', '$location', '$localStorage', 'authService', function($rootScope, $scope, $location, $localStorage, authService) {
+    .controller('signInController', ['$rootScope', '$scope', '$location', '$localStorage', 'authService', '$state', function($rootScope, $scope, $location, $localStorage, authService, $state) {
 
         $scope.signIn = function() {
             var formData = {
@@ -11,13 +11,12 @@ myApp
                 password: $scope.password
             };
 
-            authService.signin(formData, function(res) {
-                if (res.type == false) {
-                    alert(res.data)
-                } else {
-                    $localStorage.token = res.data.token;
-                    window.location = "/";
-                }
+            authService.signin(formData).then(
+                function (response) {
+                    $localStorage.token = response.data.token;
+                    $rootScope.userName = response.data.userName;
+                    $state.go('menu');
+
             }, function(error) {
                 $rootScope.error = 'Failed to signin';
             })
@@ -49,12 +48,9 @@ myApp
         //     })
         // };
 
-        // $scope.logout = function() {
-        //     Main.logout(function() {
-        //         window.location = "/"
-        //     }, function() {
-        //         alert("Failed to logout!");
-        //     });
-        // };
-        // $scope.token = $localStorage.token;
+        $scope.logout = function() {
+            delete $localStorage.token;
+            delete $rootScope.userName;
+            $state.go('signin');
+        };
     }]);

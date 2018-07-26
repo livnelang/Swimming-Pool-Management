@@ -1,6 +1,6 @@
 var myApp = angular.module("myApp",['ui.router', 'ngDialog', 'ngStorage']);
 
-myApp.config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $rootScope) {
+myApp.config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
 
     $locationProvider.hashPrefix('!');
     $urlRouterProvider.otherwise("/menu");
@@ -9,7 +9,10 @@ myApp.config(function($stateProvider, $urlRouterProvider, $locationProvider, $ht
         .state('signin', {
             url: '/signin',
             templateUrl: 'components/signIn/signIn.html',
-            controller: 'signInController'
+            controller: 'signInController',
+            data: {
+                requireLogin: false
+            }
         })
         .state('menu', {
             url: '/menu',
@@ -45,15 +48,6 @@ myApp.config(function($stateProvider, $urlRouterProvider, $locationProvider, $ht
         });
 
 
-    $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-        var requireLogin = toState.data.requireLogin;
-
-        if (requireLogin && typeof $localStorage.token === 'undefined') {
-            event.preventDefault();
-            // get me a login modal!
-        }
-    });
-
     $httpProvider.interceptors.push(['$q', '$location', '$localStorage', function($q, $location, $localStorage) {
         return {
             'request': function (config) {
@@ -74,3 +68,17 @@ myApp.config(function($stateProvider, $urlRouterProvider, $locationProvider, $ht
 
 
 });
+
+
+myApp.run(["$rootScope", "$localStorage", "$state", "$transitions", function($rootScope, $localStorage, $state, $transitions) {
+
+    $transitions.onStart({}, function($transitions) {
+        var requireLogin = $transitions.$to().data.requireLogin;
+
+        if (requireLogin && typeof $localStorage.token === 'undefined') {
+            $transitions.abort();
+            $state.go('signin');
+        }
+    });
+
+}]);
