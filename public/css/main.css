@@ -122,3 +122,12 @@ input, select, ul, .ngdialog-content {
 }
 
 
+/* SIGNIN PAGE */
+
+.signInContainer h2 {
+    text-align: right;
+    color: cornflowerblue;
+}
+.signInButton {
+    float: right;
+}

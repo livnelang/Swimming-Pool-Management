@@ -4,6 +4,7 @@ var mongoose = require('mongoose'), Schema = mongoose.Schema;
 // Define a new 'AppUserSchema'
 var appUserSchema = new Schema({
     name: String,
+    email: String,
     password: String,
     admin: Boolean
 },{collection: 'appUsers'});

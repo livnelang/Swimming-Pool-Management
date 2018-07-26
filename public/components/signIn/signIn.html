@@ -1,0 +1,14 @@
+<div class="addClientContainer addContainer signInContainer">
+    <h2>כניסה לקיוסק</h2>
+    <div class="form-group">
+        <label>מייל:</label>
+        <input ng-model="email" type="email" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label> סיסמא:</label>
+        <input ng-model="password" type="password" class="form-control">
+    </div>
+
+    <button ng-disabled="isLoading" type="button" ng-click="signIn()" class="btn btn-success signInButton">התחבר</button>
+</div>
