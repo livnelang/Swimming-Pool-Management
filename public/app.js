@@ -1,6 +1,6 @@
-var myApp = angular.module("myApp",['ui.router', 'ngDialog', 'ngStorage']);
+var myApp = angular.module("myApp", ['ui.router', 'ngDialog', 'ngStorage']);
 
-myApp.config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+myApp.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
 
     $locationProvider.hashPrefix('!');
     $urlRouterProvider.otherwise("/menu");
@@ -48,7 +48,7 @@ myApp.config(function($stateProvider, $urlRouterProvider, $locationProvider, $ht
         });
 
 
-    $httpProvider.interceptors.push(['$q', '$location', '$localStorage', function($q, $location, $localStorage) {
+    $httpProvider.interceptors.push(['$q', '$location', '$localStorage', function ($q, $location, $localStorage) {
         return {
             'request': function (config) {
                 config.headers = config.headers || {};
@@ -57,8 +57,8 @@ myApp.config(function($stateProvider, $urlRouterProvider, $locationProvider, $ht
                 }
                 return config;
             },
-            'responseError': function(response) {
-                if(response.status === 401 || response.status === 403) {
+            'responseError': function (response) {
+                if (response.status === 401 || response.status === 403) {
                     $location.path('/signin');
                 }
                 return $q.reject(response);
@@ -70,14 +70,17 @@ myApp.config(function($stateProvider, $urlRouterProvider, $locationProvider, $ht
 });
 
 
-myApp.run(["$rootScope", "$localStorage", "$state", "$transitions", function($rootScope, $localStorage, $state, $transitions) {
+myApp.run(["$rootScope", "$localStorage", "$state", "$transitions", function ($rootScope, $localStorage, $state, $transitions) {
 
-    $transitions.onStart({}, function($transitions) {
+    $transitions.onStart({}, function ($transitions) {
         var requireLogin = $transitions.$to().data.requireLogin;
 
         if (requireLogin && typeof $localStorage.token === 'undefined') {
             $transitions.abort();
             $state.go('signin');
+        }
+        else {
+            $rootScope.userName = $localStorage.userName;
         }
     });
 

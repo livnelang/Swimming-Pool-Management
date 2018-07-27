@@ -21,6 +21,7 @@
     <script type="text/javascript" src="./components/services/authService.js"></script>
 
 
+    <script type="text/javascript" src="./components/mainHeader/mainHeader.js"></script>
     <script type="text/javascript" src="./components/signIn/signIn.js"></script>
     <script type="text/javascript" src="./components/menu/menu.js"></script>
     <script type="text/javascript" src="./components/addClient/addClient.js"></script>
@@ -35,13 +36,7 @@
 <!-- wrapper  -->
 <div id="wrapper">
     <!--navigation-bar -->
-    <header>
-        <div class="userPanel" ng-if="$root.userName">
-            <span>{{$root.userName}}</span>
-            <span class="logout">התנתק</span>
-        </div>
-        <img ui-sref="menu" src="/images/pool.png"/>
-    </header>
+    <main-header></main-header>
     <!-- main  -->
     <main ui-view>
 

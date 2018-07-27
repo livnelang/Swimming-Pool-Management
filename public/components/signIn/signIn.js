@@ -14,7 +14,7 @@ myApp
             authService.signin(formData).then(
                 function (response) {
                     $localStorage.token = response.data.token;
-                    $rootScope.userName = response.data.userName;
+                    $localStorage.userName = response.data.userName;
                     $state.go('menu');
 
             }, function(error) {
@@ -47,10 +47,4 @@ myApp
         //         $rootScope.error = 'Failed to fetch details';
         //     })
         // };
-
-        $scope.logout = function() {
-            delete $localStorage.token;
-            delete $rootScope.userName;
-            $state.go('signin');
-        };
     }]);

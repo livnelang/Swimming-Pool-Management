@@ -28,6 +28,7 @@ header img {
 }
 .userPanel .logout {
     cursor: pointer;
+    text-decoration: underline;
 }
 
 input, select, ul, .ngdialog-content {

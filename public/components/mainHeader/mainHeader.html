@@ -1,0 +1,8 @@
+<!--navigation-bar -->
+<header>
+    <div class="userPanel" ng-if="$root.userName">
+        <span>{{$root.userName}}</span>
+        <span class="logout" ng-click="logout()">התנתק</span>
+    </div>
+    <img ui-sref="menu" src="/images/pool.png"/>
+</header>
