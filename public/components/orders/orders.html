@@ -4,8 +4,8 @@
     <div class="ordersFilterRow">
         <div class="form-group">
             <label>בחר לקוח:</label>
-            <select ng-model="formObject.clientAccountNumber" class="form-control"
-                ng-options="client.accountNumber as client.firstName + ' ' + client.lastName for client in clients">
+            <select ng-model="formObject.client" class="form-control"
+                ng-options="client as client.firstName + ' ' + client.lastName for client in clients">
                 <!--<option ng-repeat="client in clients" value="{{client.accountNumber}}">{{client.firstName}} {{client.lastName}}</option>-->
             </select>
         </div>
@@ -23,6 +23,10 @@
 
     <!--filter table-->
     <div class="container ordersTable" ng-if="orders.length > 0">
+        <div class="clientMonthlySum" ng-if="!formObject.isAllClients">
+            <span>סה"כ הוצאות לקוח בחודש:</span>
+            <span></span>
+        </div>
         <table class="table table-striped">
             <thead>
             <tr>

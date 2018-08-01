@@ -132,6 +132,10 @@ input, select, ul, .ngdialog-content {
     direction: ltr;
 }
 
+.clientMonthlySum {
+    margin: 16px 0;
+}
+
 
 /* SIGNIN PAGE */
 

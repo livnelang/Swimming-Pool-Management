@@ -22,7 +22,7 @@ exports.addClient = function (req, res) {
         }
         else {
             if (err.code === 11000) {
-                res.status(500).json({message: "מספר החשבון כבר קיים"});
+                res.status(500).json({message: "הלקוח כבר קיים"});
             }
             else {
                 res.status(500).json(err);
@@ -83,17 +83,58 @@ exports.getOrders = function (req, res) {
         $lt: orderFilter.date.endDate
     };
 
-    // if its a client only
-    if (!orderFilter.isAllClients || orderFilter.isAllClients === undefined) {
-        ordersQuery.accountNumber = undefined;
-        ordersQuery.accountNumber = orderFilter.clientAccountNumber;
+    // if its all clients
+    if (orderFilter.isAllClients) {
+        console.log(orderFilter.isAllClients);
+        Orders.find(ordersQuery, function (err, clients) {
+            if (!err) {
+                res.status(200).json(clients);
+            }
+            else {
+                res.status(500).json(err);
+            }
+        });
     }
-    Orders.find(ordersQuery, function (err, clients) {
-        if (!err) {
-            res.status(200).json(clients);
-        }
-        else {
-            res.status(500).json(err);
-        }
-    });
+    else {
+        Orders.aggregate([
+            {
+                $match: {
+                    date: {
+                        $gte: orderFilter.date.startDate,
+                        $lt: orderFilter.date.endDate
+                    }
+                }
+            },
+            {
+                $project: {
+                    firstName: 1,
+                    date: 1,
+                    lastName: 1,
+                    productName: 1,
+                    pricePerProduct: 1,
+                    quantity: 1,
+                    total: {$multiply: ["$pricePerProduct", "$quantity"]}
+                }
+            }
+        ], function (err, results) {
+            if (err) {
+                res.status(500).json(err);
+            }
+            else {
+                console.log(results);
+                res.status(200).json(results);
+
+            }
+        });
+    }
+    // Orders.find(ordersQuery, function (err, clients) {
+    //     if (!err) {
+    //         res.status(200).json(clients);
+    //     }
+    //     else {
+    //         res.status(500).json(err);
+    //     }
+    // });
+
+
 };

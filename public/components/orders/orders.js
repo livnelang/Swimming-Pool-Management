@@ -19,8 +19,8 @@ myApp.controller('ordersController', ['$scope', 'apiService', 'ngDialog', '$stat
     apiService.getAllClients().then(
         function (response) {
             $scope.clients = response.data;
-            $scope.clients.unshift({firstName: "כל הלקוחות",accountNumber: "allClients"});
-            $scope.formObject.clientAccountNumber = $scope.clients[0].accountNumber;
+            $scope.clients.unshift({firstName: "כל הלקוחות", accountNumber: "allClients"});
+            $scope.formObject.client = $scope.clients[0];
         },
         function (error) {
             console.log(error);
@@ -42,7 +42,7 @@ myApp.controller('ordersController', ['$scope', 'apiService', 'ngDialog', '$stat
 
 
     $scope.showResults = function () {
-        if($scope.formObject.clientAccountNumber === "allClients") {
+        if($scope.formObject.client.firstName === "כל הלקוחות") {
             $scope.formObject.isAllClients = true;
         }
         else {
@@ -56,7 +56,7 @@ myApp.controller('ordersController', ['$scope', 'apiService', 'ngDialog', '$stat
             function (error) {
                 // console.log(error);
             });
-    }
+    };
 
     function setCurrentMonth() {
         var currentDate = new Date();

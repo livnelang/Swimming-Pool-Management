@@ -50,8 +50,6 @@ myApp.controller('addOrderController', ['$scope', 'apiService','ngDialog','$stat
     // Set value to search box
     $scope.setValue = function (index, $event) {
 
-        //first, set accountNumber field with searchText value
-        $scope.newOrder.accountNumber = $scope.searchResult[index].accountNumber;
         $scope.newOrder.firstName =  $scope.searchResult[index].firstName;
         $scope.newOrder.lastName =  $scope.searchResult[index].lastName;
 
