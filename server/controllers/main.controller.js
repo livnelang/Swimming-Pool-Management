@@ -86,22 +86,40 @@ exports.getOrders = function (req, res) {
     // if its all clients
     if (orderFilter.isAllClients) {
         console.log(orderFilter.isAllClients);
-        Orders.find(ordersQuery, function (err, clients) {
-            if (!err) {
-                res.status(200).json(clients);
+        Orders.aggregate([
+            {
+                $project: {
+                    firstName: 1,
+                    date: 1,
+                    lastName: 1,
+                    productName: 1,
+                    pricePerProduct: 1,
+                    quantity: 1,
+                    total: {$multiply: ["$pricePerProduct", "$quantity"]}
+                }
+            }
+        ], function (err, results) {
+            if (err) {
+                res.status(500).json(err);
             }
             else {
-                res.status(500).json(err);
+                res.status(200).json(results);
+
             }
         });
     }
     else {
+        console.log(orderFilter.date.startDate);
+        console.log(orderFilter.date.endDate);
+
         Orders.aggregate([
             {
                 $match: {
+                    firstName: orderFilter.client.firstName,
+                    lastName: orderFilter.client.lastName,
                     date: {
-                        $gte: orderFilter.date.startDate,
-                        $lt: orderFilter.date.endDate
+                        $gte: new Date(orderFilter.date.startDate),
+                        $lt: new Date(orderFilter.date.endDate)
                     }
                 }
             },
@@ -121,7 +139,6 @@ exports.getOrders = function (req, res) {
                 res.status(500).json(err);
             }
             else {
-                console.log(results);
                 res.status(200).json(results);
 
             }

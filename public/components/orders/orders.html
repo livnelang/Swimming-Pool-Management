@@ -23,9 +23,10 @@
 
     <!--filter table-->
     <div class="container ordersTable" ng-if="orders.length > 0">
-        <div class="clientMonthlySum" ng-if="!formObject.isAllClients">
-            <span>סה"כ הוצאות לקוח בחודש:</span>
-            <span></span>
+        <div class="clientMonthlySum">
+            <span ng-if="!formObject.isAllClients">סה"כ הוצאות לקוח בחודש הזה:</span>
+            <span ng-if="formObject.isAllClients">סה"כ מכירות החודש:</span>
+            <span>{{ getTotal()}} &#8362;</span>
         </div>
         <table class="table table-striped">
             <thead>

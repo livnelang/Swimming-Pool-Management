@@ -58,6 +58,15 @@ myApp.controller('ordersController', ['$scope', 'apiService', 'ngDialog', '$stat
             });
     };
 
+
+    $scope.getTotal = function() {
+        var total = 0;
+        for(var i = 0; i < $scope.orders.length; i++){
+            total +=  $scope.orders[i].total;
+        }
+        return total;
+    };
+
     function setCurrentMonth() {
         var currentDate = new Date();
         for(var i = 0; i<$scope.months.length;i++) {
