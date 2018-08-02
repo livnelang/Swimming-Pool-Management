@@ -85,7 +85,6 @@ exports.getOrders = function (req, res) {
 
     // if its all clients
     if (orderFilter.isAllClients) {
-        console.log(orderFilter.isAllClients);
         Orders.aggregate([
             {
                 $project: {
@@ -109,8 +108,6 @@ exports.getOrders = function (req, res) {
         });
     }
     else {
-        console.log(orderFilter.date.startDate);
-        console.log(orderFilter.date.endDate);
 
         Orders.aggregate([
             {
