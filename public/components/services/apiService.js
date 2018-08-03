@@ -20,6 +20,15 @@ myApp
                     }
                 });
             },
+            deleteOrder:function(orderObjectId){
+                return $http({
+                    method: "POST",
+                    url: "/api/deleteOrder",
+                    data: {
+                        orderObjectId: orderObjectId
+                    }
+                });
+            },
             getClients:function(searchText){
                 return $http({
                     method: "POST",

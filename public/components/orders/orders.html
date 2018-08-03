@@ -38,7 +38,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="item in orders | orderBy: '-date'">
+            <tr class="orderRow" ng-repeat="item in orders | orderBy: '-date'"
+            ng-click="deleteOrder(item._id)">
                 <td>{{item.firstName}} {{item.lastName}}</td>
                 <td>{{item.productName}} / {{item.pricePerProduct}}</td>
                 <td>{{item.quantity}}</td>

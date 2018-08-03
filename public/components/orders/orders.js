@@ -42,7 +42,7 @@ myApp.controller('ordersController', ['$scope', 'apiService', 'ngDialog', '$stat
 
 
     $scope.showResults = function () {
-        if($scope.formObject.client.firstName === "כל הלקוחות") {
+        if ($scope.formObject.client.firstName === "כל הלקוחות") {
             $scope.formObject.isAllClients = true;
         }
         else {
@@ -59,18 +59,47 @@ myApp.controller('ordersController', ['$scope', 'apiService', 'ngDialog', '$stat
     };
 
 
-    $scope.getTotal = function() {
+    $scope.getTotal = function () {
         var total = 0;
-        for(var i = 0; i < $scope.orders.length; i++){
-            total +=  $scope.orders[i].total;
+        for (var i = 0; i < $scope.orders.length; i++) {
+            total += $scope.orders[i].total;
         }
         return total;
     };
 
+    $scope.deleteOrder = function (orderObjectId) {
+        //todo: md dialog for delete
+        ngDialog.openConfirm({
+            template: '\
+                <h2>למחוק הזמנה?</h2>\
+                <div class="ngdialog-buttons">\
+                    <button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog(0)">בטל</button>\
+                    <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="confirm(1)">מחק</button>\
+                </div>',
+            plain: true
+        }).then(function (success) {
+            apiService.deleteOrder(orderObjectId).then(
+                function (response) {
+                    for(var i in $scope.orders) {
+                        if($scope.orders[i]['_id'] === orderObjectId) {
+                            $scope.orders.splice(i, 1);
+                            break;
+                        }
+                    }
+                },
+                function (error) {
+
+                    console.log(error);
+                });
+
+
+        });
+    };
+
     function setCurrentMonth() {
         var currentDate = new Date();
-        for(var i = 0; i<$scope.months.length;i++) {
-            if(currentDate.getMonth() === $scope.months[i].date.startDate.getMonth()) {
+        for (var i = 0; i < $scope.months.length; i++) {
+            if (currentDate.getMonth() === $scope.months[i].date.startDate.getMonth()) {
                 $scope.formObject.date = $scope.months[i].date;
                 return;
             }

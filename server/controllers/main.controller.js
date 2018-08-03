@@ -70,6 +70,19 @@ exports.addOrder = function (req, res) {
     });
 };
 
+exports.deleteOrder = function (req, res) {
+    res.set("Content-Type", "application/json");
+    Orders.remove({ _id: req.body.orderObjectId }, function(err) {
+        if (!err) {
+            res.status(200).json();
+        }
+        else {
+            console.log(err);
+            res.status(500).json(err);
+        }
+    });
+};
+
 exports.getOrders = function (req, res) {
     var orderFilter = req.body.formObject;
 

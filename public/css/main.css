@@ -135,6 +135,9 @@ input, select, ul, .ngdialog-content {
 .clientMonthlySum {
     margin: 16px 0;
 }
+.ordersTable .orderRow {
+    cursor: pointer;
+}
 
 
 /* SIGNIN PAGE */
