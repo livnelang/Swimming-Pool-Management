@@ -138,7 +138,23 @@ input, select, ul, .ngdialog-content {
 .ordersTable .orderRow {
     cursor: pointer;
 }
+.deleteBox {
+    display: flex;
+    justify-content: space-between;
+    direction: ltr;
+}
+.deleteButtonsRow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.garbageImgBox {
 
+}
+.garbageImgBox img {
+    width: 70px;
+    height: 70px;
+}
 
 /* SIGNIN PAGE */
 
