@@ -71,13 +71,15 @@ myApp.controller('ordersController', ['$scope', 'apiService', 'ngDialog', '$stat
         //todo: md dialog for delete
         ngDialog.openConfirm({
             template: '\
-                <h2>למחוק הזמנה?</h2>\
                 <div class="ngdialog-buttons deleteBox">\
-                <div class="garbageImgBox"><img src="/images/garbage.png"/></div>\
-                    <div class="deleteButtonsRow">\
-                        <button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog(0)">בטל</button>\
-                        <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="confirm(1)">מחק</button>\
-                    <div>\
+                    <div class="deleteOrderContainer">\
+                        <h2>למחוק הזמנה?</h2>\
+                        <div class="deleteButtonsRow">\
+                            <button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog(0)">בטל</button>\
+                            <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="confirm(1)">מחק</button>\
+                        </div>\
+                    </div>\
+                    <div class="garbageImgBox"><img src="/images/garbage.png"/></div>\
                 </div>',
             plain: true
         }).then(function (success) {

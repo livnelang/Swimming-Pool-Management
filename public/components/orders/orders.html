@@ -5,7 +5,7 @@
         <div class="form-group">
             <label>בחר לקוח:</label>
             <select ng-model="formObject.client" class="form-control"
-                ng-options="client as client.firstName + ' ' + client.lastName for client in clients">
+                ng-options="client as client.firstName + ' ' + client.lastName for client in clients | orderBy:['firstName','lastName']">
                 <!--<option ng-repeat="client in clients" value="{{client.accountNumber}}">{{client.firstName}} {{client.lastName}}</option>-->
             </select>
         </div>

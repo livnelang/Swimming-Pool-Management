@@ -90,15 +90,16 @@ exports.getOrders = function (req, res) {
     var ordersQuery = {};
     res.set("Content-Type", "application/json");
 
-    // set the query date
-    ordersQuery.date = {
-        $gte: orderFilter.date.startDate,
-        $lt: orderFilter.date.endDate
-    };
-
     // if its all clients
     if (orderFilter.isAllClients) {
-        Orders.aggregate([
+        Orders.aggregate([{
+            $match: {
+                date: {
+                    $gte: new Date(orderFilter.date.startDate),
+                    $lt: new Date(orderFilter.date.endDate)
+                }
+            }
+        },
             {
                 $project: {
                     firstName: 1,
@@ -120,6 +121,7 @@ exports.getOrders = function (req, res) {
             }
         });
     }
+    // specific client
     else {
 
         Orders.aggregate([

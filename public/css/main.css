@@ -141,7 +141,14 @@ input, select, ul, .ngdialog-content {
 .deleteBox {
     display: flex;
     justify-content: space-between;
-    direction: ltr;
+    direction: rtl;
+    padding-bottom: 20px;
+}
+.deleteOrderContainer {
+    padding-right: 60px;
+}
+.deleteOrderContainer h2 {
+    margin-bottom: 20px;
 }
 .deleteButtonsRow {
     display: flex;
@@ -149,7 +156,7 @@ input, select, ul, .ngdialog-content {
     justify-content: center;
 }
 .garbageImgBox {
-
+    align-self: flex-end;
 }
 .garbageImgBox img {
     width: 70px;
