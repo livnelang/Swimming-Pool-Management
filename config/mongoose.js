@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 // Define the Mongoose configuration schemas
 module.exports = function() {
     //Connect to MongoDB with Mongoose
-    var db = mongoose.connect('mongodb://poolAdmin:1a2s3d4f@ds129321.mlab.com:29321/swimming-pool');
+    var db = mongoose.connect(process.env.MONGOLAB_URI, {useNewUrlParser: true } );
 
 
     db = mongoose.connection;
