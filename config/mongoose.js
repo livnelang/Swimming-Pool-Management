@@ -16,7 +16,7 @@ module.exports = function () {
 
     // If the connection throws an error
     db.on('error', function (err) {
-        console.log(' *** Mongoose connection error ***');
+        console.log(' *** Mongoose connection error ***', err);
     });
 
     //Load the application models
