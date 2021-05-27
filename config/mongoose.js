@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 module.exports = function () {
     //Connect to MongoDB with Mongoose
     let db = mongoose.connect(
-        process.env.MONGOLAB_URI,
+        process.env.MONGODB_URI,
         {
             useNewUrlParser: true,
             useUnifiedTopology: true,
