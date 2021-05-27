@@ -1,4 +1,4 @@
-var myApp = angular.module("myApp", ['ui.router', 'ngDialog', 'ngStorage']);
+var myApp = angular.module("myApp", ['ui.router', 'ngDialog', 'ngStorage', 'oitozero.ngSweetAlert']);
 
 myApp.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
 
