@@ -8,7 +8,7 @@ myApp
             const loginErrorMessage = {
                 title: "שגיאה",
                 message: "פרטי התחברות אינם נכונים"
-            };
+            };  
 
             $scope.signIn = function () {
                 var formData = {
