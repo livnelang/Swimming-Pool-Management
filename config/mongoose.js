@@ -13,7 +13,12 @@ module.exports = function () {
         });
 
     db = mongoose.connection;
-    
+
+    // If the connection throws an error
+    db.on('error', function (err) {
+        console.log(' *** Mongoose connection error ***');
+    });
+
     //Load the application models
     require('../server/models/client.model');
     require('../server/models/order.model');
