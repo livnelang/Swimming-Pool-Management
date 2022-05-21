@@ -53,6 +53,17 @@ myApp
                     }
                 });
             },
+            sendOrdersByMail:function(formObject, mailsDetails, subjectPrefix){
+                return $http({
+                    method: "POST",
+                    url: "/api/sendOrdersByEmail",
+                    data: {
+                        formObject: formObject,
+                        mailsDetails: mailsDetails,
+                        subjectPrefix: subjectPrefix
+                    }
+                });
+            },
             upsert:function (item) {
 
                 return $http({

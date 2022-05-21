@@ -20,6 +20,8 @@ myApp
                     function (response) {
                         $localStorage.token = response.data.token;
                         $localStorage.userName = response.data.userName;
+                        $localStorage.defaultMailAddress = response.data.defaultMailAddress;
+                        $rootScope.defaultMailAddress = response.data.defaultMailAddress;
                         $state.go('menu');
 
                     }, function (error) {

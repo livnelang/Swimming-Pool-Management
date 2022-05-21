@@ -109,10 +109,6 @@ input, select, ul, .ngdialog-content {
 
 }
 
-.ordersDatesRow {
-
-}
-
 .ordersDate {
     width: 120px;
     display: inline-block;
@@ -171,4 +167,28 @@ input, select, ul, .ngdialog-content {
 }
 .signInButton {
     float: right;
+}
+
+
+/* Mail Dialog Part */
+.mailDialog {
+    margin-top: 16px;
+}
+
+.mailDialog input[type='checkbox'] {
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+.mailDialog .add-another-mail img {
+    width: 16px;
+    cursor: pointer;
+}
+
+.mailDialog .sendMailsButton {
+    margin-top: 16px;
+}
+
+.mailDialog .another-mail-input {
+    margin-top: 8px;
 }
