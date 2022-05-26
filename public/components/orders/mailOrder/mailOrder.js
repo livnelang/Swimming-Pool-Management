@@ -28,7 +28,7 @@ myApp.controller("mailOrderController", [
         .catch((err) => {
           $scope.mailStatus = 500;
           $scope.mailResponseHeader = "לא הצלחנו לשלוח את המייל";
-          $scope.mailResponseMessage = error.data.message;
+          $scope.mailResponseMessage = err.data.message;
         })
         .finally(() => {
           $scope.isLoading = false;

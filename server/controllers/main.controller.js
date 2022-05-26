@@ -130,6 +130,9 @@ exports.getOrders = async function (req, res) {
 };
 
 exports.sendClientOrdersByEmail = async function (req, res) {
+  if (req.body.formObject.client.firstName === "כל הלקוחות") {
+    return res.status(500).json({ message: "Cannot send mail with all customers" });
+  }
   const results = await getClientMonthOrder(req.body.formObject);
   const { parse } = require("json2csv");
 

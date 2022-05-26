@@ -112,6 +112,14 @@ myApp.controller("ordersController", [
     };
 
     $scope.handleClickOpenMailDialog = () => {
+      if ($scope.formObject.client.firstName === "כל הלקוחות") {
+        return ngDialog.open({
+          template: "cantMailAllClientsTemplateId",
+          className: "ngdialog-theme-default",
+          scope: $scope,
+        });
+      }
+
       const newScope = $scope.$new();
       $scope.mailDialog = ngDialog.open({
         template: "../components/orders/mailOrder/mailDialog.html",
