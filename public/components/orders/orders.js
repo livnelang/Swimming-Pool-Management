@@ -11,12 +11,12 @@ myApp.controller("ordersController", [
     $scope.formObject.clientAccountNumber = {};
 
     $scope.months = [
-      { name: "מאי", date: setMonthTime(4) },
-      { name: "יוני", date: setMonthTime(5) },
-      { name: "יולי", date: setMonthTime(6) },
-      { name: "אוגוסט", date: setMonthTime(7) },
-      { name: "ספטמבר", date: setMonthTime(8) },
-      { name: "אוקטובר", date: setMonthTime(9) },
+      { name: "מאי", date: setMonthTime(4, "מאי") },
+      { name: "יוני", date: setMonthTime(5, "יוני") },
+      { name: "יולי", date: setMonthTime(6, "יולי") },
+      { name: "אוגוסט", date: setMonthTime(7, "אוגוסט") },
+      { name: "ספטמבר", date: setMonthTime(8, "ספטמבר") },
+      { name: "אוקטובר", date: setMonthTime(9, "אוקטובר") },
     ];
     setCurrentMonth();
 
@@ -34,7 +34,7 @@ myApp.controller("ordersController", [
       }
     );
 
-    function setMonthTime(month) {
+    function setMonthTime(month, name) {
       var dateObj = {};
 
       var st = new Date();
@@ -43,6 +43,8 @@ myApp.controller("ordersController", [
 
       dateObj.startDate = new Date(st);
       dateObj.endDate = new Date(st.getFullYear(), st.getMonth() + 1, 1);
+
+      dateObj.name = name;
 
       return dateObj;
     }
@@ -107,19 +109,11 @@ myApp.controller("ordersController", [
         });
     };
 
-    $scope.setCurrentMonthName = (selectedName) => {
-      $scope.currentMonthName = selectedName;
+    $scope.setCurrentMonthName = () => {
+      $scope.currentMonthName = $scope.formObject.date.name;
     };
 
     $scope.handleClickOpenMailDialog = () => {
-      if ($scope.formObject.client.firstName === "כל הלקוחות") {
-        return ngDialog.open({
-          template: "cantMailAllClientsTemplateId",
-          className: "ngdialog-theme-default",
-          scope: $scope,
-        });
-      }
-
       const newScope = $scope.$new();
       $scope.mailDialog = ngDialog.open({
         template: "../components/orders/mailOrder/mailDialog.html",

@@ -14,12 +14,12 @@
             <label>בחר חודש:</label>
             <select ng-model="formObject.date" class="form-control"
                 ng-options="month.date as month.name for month in months"
-                ng-click="setCurrentMonthName(month.name)">
+                ng-change="setCurrentMonthName(month)">
             </select>
     </div>
 
         <button type="button" ng-click="showResults()" class="btn btn-success showOrdersButton">הצג</button>
-        <button type="button" ng-click="handleClickOpenMailDialog()" class="btn btn-success showOrdersButton" style="margin-top: 16px;">שלח במייל</button>
+        <button type="button" ng-click="handleClickOpenMailDialog()" class="btn btn-success showOrdersButton" style="margin-top: 16px;">שלח הזמנות חודשיות במייל</button>
     </div>
 
 

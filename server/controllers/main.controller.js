@@ -129,37 +129,23 @@ exports.getOrders = async function (req, res) {
   }
 };
 
-exports.sendClientOrdersByEmail = async function (req, res) {
-  if (req.body.formObject.client.firstName === "כל הלקוחות") {
-    return res.status(500).json({ message: "Cannot send mail with all customers" });
-  }
-  const results = await getClientMonthOrder(req.body.formObject);
+exports.sendMonthlyOrdersByEmail = async function (req, res) {
+  const results = await getAllClientsMonthlyTable(req.body.formObject);
   const { parse } = require("json2csv");
 
   // real data
-  let data = results.map((order) => ({
-    תאריך: moment(order.date).format("YYYY-MM-DD HH:mm"),
-    מוצר: order.productName,
-    מחיר: order.pricePerProduct,
-    כמות: order.quantity,
-    "סכום רכישה": order.pricePerProduct * order.quantity,
+  let data = results.map((row) => ({
+    שם: row["_id"],
+    "קולה/קרטיב": row["קולה/קרטיב"],
+    בירה: row["בירה"],
+    "סכום רכישה חודשי": row.totalSaleAmount,
+    "": "",
+    "קולה/קרטיב =4 ₪": "",
+    "בירה =10 ₪": "",
   }));
 
-  const totalOrdersPrice = results.reduce(
-    (acc, order) => acc + order.pricePerProduct * order.quantity,
-    0
-  );
-  data.push({ "סכום רכישה כולל": totalOrdersPrice });
-
   //convert the data to CSV with the column names
-  const csv = parse(data, [
-    "תאריך",
-    "מוצר",
-    "מחיר",
-    "כמות",
-    "סכום רכישה",
-    "סכום רכישה כולל",
-  ]);
+  const csv = parse(data, ["שם", "קולה/קרטיב", "בירה", "סכום רכישה חודשי"]);
 
   const SibApiV3Sdk = require("sib-api-v3-sdk");
   let defaultClient = SibApiV3Sdk.ApiClient.instance;
@@ -187,8 +173,11 @@ exports.sendClientOrdersByEmail = async function (req, res) {
     });
   }
 
-  if (mailsDetails.extraMail) {
-    sendSmtpEmail.to.push({ email: mailsDetails.extraMail });
+  if (mailsDetails.ownerMail) {
+    sendSmtpEmail.to.push({
+      email: process.env.OWNER_MAIL_ADDRESS,
+      name: 'עוז נוי',
+    });
   }
 
   const base64CSV = Buffer.from(csv).toString("base64");
@@ -200,6 +189,9 @@ exports.sendClientOrdersByEmail = async function (req, res) {
   ];
 
   sendSmtpEmail.templateId = 3;
+  sendSmtpEmail.params = {
+    dateText: mailsDetails.dateText,
+  };
   apiInstance.sendTransacEmail(sendSmtpEmail).then(
     function (data) {
       console.log(
@@ -242,6 +234,60 @@ async function getClientMonthOrder(orderFilter) {
     function (err, results) {
       if (err) {
         throw new Error({ message: "Failed to fetch client orders" });
+      } else {
+        return results;
+      }
+    }
+  );
+}
+
+async function getAllClientsMonthlyTable(orderFilter) {
+  return Orders.aggregate(
+    [
+      {
+        $match: {
+          date: {
+            $gte: new Date(orderFilter.date.startDate),
+            $lt: new Date(orderFilter.date.endDate),
+          },
+        },
+      },
+      {
+        $group: {
+          _id: { $concat: ["$firstName", " ", "$lastName"] },
+          "קולה/קרטיב": {
+            $sum: {
+              $cond: [
+                {
+                  $or: [
+                    { $eq: ["$productName", "קרטיב"] },
+                    { $eq: ["$productName", "קולה"] },
+                  ],
+                },
+                "$quantity",
+                0,
+              ],
+            },
+          },
+          בירה: {
+            $sum: {
+              $cond: [{ $eq: ["$productName", "בירה"] }, "$quantity", 0],
+            },
+          },
+          totalSaleAmount: {
+            $sum: { $multiply: ["$quantity", "$pricePerProduct"] },
+          },
+        },
+      },
+      {
+        $sort: { _id: 1 },
+      },
+    ],
+    function (err, results) {
+      if (err) {
+        throw new Error({
+          message: "Failed to fetch all clients monthly orders",
+        });
       } else {
         return results;
       }

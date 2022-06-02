@@ -82,6 +82,7 @@ myApp.run(["$rootScope", "$localStorage", "$state", "$transitions", function ($r
         else {
             $rootScope.userName = $localStorage.userName;
             $rootScope.defaultMailAddress = $localStorage.defaultMailAddress;
+            $rootScope.ownerMailAddress = $localStorage.ownerMailAddress;
         }
     });
 

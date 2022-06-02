@@ -38,7 +38,8 @@ exports.authenticate = function (req,res)  {
                     message: 'Enjoy your token!',
                     token: token,
                     userName: user.name,
-                    defaultMailAddress: process.env.DEFAULT_MAIL_ADDRESS
+                    defaultMailAddress: process.env.DEFAULT_MAIL_ADDRESS,
+                    ownerMailAddress: process.env.OWNER_MAIL_ADDRESS,
                 });
             }
 

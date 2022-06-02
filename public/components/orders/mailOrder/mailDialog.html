@@ -3,30 +3,18 @@
   <form name="mailForm" ng-submit="handleClickSendMail()">
     <h4>למי לשלוח?</h4>
     <div class="form-group">
-      <input ng-model="mainMail" type="checkbox" name="mainMail" ng-init="mainMail=true"/>
+      <input ng-model="mainMail" type="checkbox" name="mainMail" ng-init="mainMail=false"/>
       <label for="mainMail">מש"א - {{$root.defaultMailAddress}}</label>
     </div>
 
-    <div class="add-another-mail">
-      <label>
-        {{!antoherMail ? 
-        'הוסף עוד מייל'
-         : 'מחק מייל נוסף'
-        }}
-      </label>
-      <span ng-click="antoherMail = !antoherMail">
-        <img ng-if="!antoherMail" src="../../images/plus.svg"/>
-        <img ng-if="antoherMail" src="../../images/minus.svg"/>
-      </span>
-    </div>
-
-    <div class="form-group" ng-show="antoherMail">
-      <input ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" ng-model="mailInput" type="mail" name="mail" class="form-control another-mail-input" />
+    <div class="form-group">
+      <input ng-model="ownerMail" type="checkbox" name="ownerMail" ng-init="ownerMail=false"/>
+      <label for="ownerMail">עוז נוי - {{$root.defaultMailAddress}}</label>
     </div>
     <button
       type="submit"
       class="btn btn-success showOrdersButton sendMailsButton"
-      ng-disabled="mailForm.$invalid || (!antoherMail && !mainMail) || isLoading"
+      ng-disabled="mailForm.$invalid || (!mainMail && !ownerMail) || isLoading"
     >
       שלח
     </button>

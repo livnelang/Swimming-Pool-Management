@@ -51,5 +51,5 @@ module.exports = function(app) {
     app.post('/api/getClients', clients.getClients);
     app.post('/api/getAllClients', clients.getAllClients);
     app.post('/api/getOrders', clients.getOrders);
-    app.post('/api/sendOrdersByEmail', clients.sendClientOrdersByEmail);
+    app.post('/api/sendMonthlyOrdersByEmail', clients.sendMonthlyOrdersByEmail);
 };

@@ -3,19 +3,15 @@ myApp.controller("mailOrderController", [
   "apiService",
   "ngDialog",
   function ($scope, apiService, ngDialog) {
-    const fullName =
-      $scope.formObject.client.firstName +
-      ($scope.formObject.client.lastName
-        ? ` ${$scope.formObject.client.lastName}`
-        : "");
     const formattedDate = `${
       $scope.currentMonthName
     } ${new Date().getFullYear()}`;
-    $scope.title = `${fullName} - ${formattedDate}`;
+    $scope.title = `כל הלקוחות - ${formattedDate}`;
     $scope.handleClickSendMail = () => {
       const mailsDetails = {
         defaultMail: $scope.mainMail,
-        extraMail: $scope.mailInput,
+        ownerMail: $scope.ownerMail,
+        dateText: formattedDate,
       };
 
       $scope.isLoading = true;

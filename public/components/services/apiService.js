@@ -56,7 +56,7 @@ myApp
             sendOrdersByMail:function(formObject, mailsDetails, subjectPrefix){
                 return $http({
                     method: "POST",
-                    url: "/api/sendOrdersByEmail",
+                    url: "/api/sendMonthlyOrdersByEmail",
                     data: {
                         formObject: formObject,
                         mailsDetails: mailsDetails,
