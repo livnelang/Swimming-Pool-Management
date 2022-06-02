@@ -40,6 +40,7 @@ exports.authenticate = function (req,res)  {
                     userName: user.name,
                     defaultMailAddress: process.env.DEFAULT_MAIL_ADDRESS,
                     ownerMailAddress: process.env.OWNER_MAIL_ADDRESS,
+                    extraAccountantMail: process.env.EXTRA_ACCOUNTANT_MAIL
                 });
             }
 

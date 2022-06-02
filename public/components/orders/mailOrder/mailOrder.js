@@ -11,6 +11,7 @@ myApp.controller("mailOrderController", [
       const mailsDetails = {
         defaultMail: $scope.mainMail,
         ownerMail: $scope.ownerMail,
+        accountantMail: $scope.accountantMail,
         dateText: formattedDate,
       };
 

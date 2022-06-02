@@ -11,10 +11,15 @@
       <input ng-model="ownerMail" type="checkbox" name="ownerMail" ng-init="ownerMail=false"/>
       <label for="ownerMail">עוז נוי - {{$root.ownerMailAddress}}</label>
     </div>
+    <div class="form-group">
+      <input ng-model="accountantMail" type="checkbox" name="accountantMail" ng-init="accountantMail=false"/>
+      <label for="accountantMail">מיכל הנה"ח - {{$root.extraAccountantMail}}</label>
+    </div>
+
     <button
       type="submit"
       class="btn btn-success showOrdersButton sendMailsButton"
-      ng-disabled="mailForm.$invalid || (!mainMail && !ownerMail) || isLoading"
+      ng-disabled="mailForm.$invalid || (!mainMail && !ownerMail && !accountantMail) || isLoading"
     >
       שלח
     </button>

@@ -22,9 +22,11 @@ myApp
                         $localStorage.userName = response.data.userName;
                         $localStorage.defaultMailAddress = response.data.defaultMailAddress;
                         $localStorage.ownerMailAddress = response.data.ownerMailAddress;
+                        $localStorage.extraAccountantMail = response.data.extraAccountantMail;
 
                         $rootScope.defaultMailAddress = response.data.defaultMailAddress;
                         $rootScope.ownerMailAddress = response.data.ownerMailAddress;
+                        $rootScope.extraAccountantMail = response.data.extraAccountantMail;
                         $state.go('menu');
 
                     }, function (error) {

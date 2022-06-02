@@ -180,6 +180,13 @@ exports.sendMonthlyOrdersByEmail = async function (req, res) {
     });
   }
 
+  if (mailsDetails.accountantMail) {
+    sendSmtpEmail.to.push({
+      email: process.env.EXTRA_ACCOUNTANT_MAIL,
+      name: 'מיכל הנה"ח',
+    });
+  }
+
   const base64CSV = Buffer.from(csv).toString("base64");
   sendSmtpEmail.attachment = [
     {
