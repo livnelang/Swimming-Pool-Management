@@ -145,7 +145,8 @@ exports.sendMonthlyOrdersByEmail = async function (req, res) {
   }));
 
   //convert the data to CSV with the column names
-  const csv = parse(data, ["שם", "קולה/קרטיב", "בירה", "סכום רכישה חודשי"]);
+  const csv = parse(data, {withBOM: true});
+  const base64CSV = Buffer.from(csv).toString("base64");
 
   const SibApiV3Sdk = require("sib-api-v3-sdk");
   let defaultClient = SibApiV3Sdk.ApiClient.instance;
@@ -176,7 +177,7 @@ exports.sendMonthlyOrdersByEmail = async function (req, res) {
   if (mailsDetails.ownerMail) {
     sendSmtpEmail.to.push({
       email: process.env.OWNER_MAIL_ADDRESS,
-      name: 'עוז נוי',
+      name: "עוז נוי",
     });
   }
 
@@ -187,10 +188,12 @@ exports.sendMonthlyOrdersByEmail = async function (req, res) {
     });
   }
 
-  const base64CSV = Buffer.from(csv).toString("base64");
+  let attachmentName = `${mailsDetails.dateText} בריכה.csv`;
+  attachmentName = attachmentName.replace(/ /g, '_');
+
   sendSmtpEmail.attachment = [
     {
-      name: "orders.csv",
+      name: attachmentName,
       content: base64CSV,
     },
   ];
@@ -211,7 +214,7 @@ exports.sendMonthlyOrdersByEmail = async function (req, res) {
       res.status(500).json({ message: error });
     }
   );
-};
+  };
 
 async function getClientMonthOrder(orderFilter) {
   return Orders.aggregate(
