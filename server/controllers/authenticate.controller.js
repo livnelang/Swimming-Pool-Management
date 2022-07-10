@@ -34,13 +34,15 @@ exports.authenticate = function (req,res)  {
 
                 // return the information including token as JSON
                 res.status(200).json({
-                    success: true,
-                    message: 'Enjoy your token!',
+                  loggedUser: {
                     token: token,
                     userName: user.name,
+                  },
+                  mails: {
                     defaultMailAddress: process.env.DEFAULT_MAIL_ADDRESS,
                     ownerMailAddress: process.env.OWNER_MAIL_ADDRESS,
-                    extraAccountantMail: process.env.EXTRA_ACCOUNTANT_MAIL
+                    extraAccountantMail: process.env.EXTRA_ACCOUNTANT_MAIL,
+                  },
                 });
             }
 

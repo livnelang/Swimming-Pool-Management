@@ -18,15 +18,16 @@ myApp
 
                 authService.signin(formData).then(
                     function (response) {
-                        $localStorage.token = response.data.token;
-                        $localStorage.userName = response.data.userName;
-                        $localStorage.defaultMailAddress = response.data.defaultMailAddress;
-                        $localStorage.ownerMailAddress = response.data.ownerMailAddress;
-                        $localStorage.extraAccountantMail = response.data.extraAccountantMail;
+                        const {loggedUser, mails} = response.data;
+                        $localStorage.token = loggedUser.token;
+                        $localStorage.userName = loggedUser.userName;
+                        $localStorage.defaultMailAddress = mails.defaultMailAddress;
+                        $localStorage.ownerMailAddress = mails.ownerMailAddress;
+                        $localStorage.extraAccountantMail = mails.extraAccountantMail;
 
-                        $rootScope.defaultMailAddress = response.data.defaultMailAddress;
-                        $rootScope.ownerMailAddress = response.data.ownerMailAddress;
-                        $rootScope.extraAccountantMail = response.data.extraAccountantMail;
+                        $rootScope.defaultMailAddress = mails.defaultMailAddress;
+                        $rootScope.ownerMailAddress = mails.ownerMailAddress;
+                        $rootScope.extraAccountantMail = mails.extraAccountantMail;
                         $state.go('menu');
 
                     }, function (error) {
