@@ -84,6 +84,7 @@ exports.addOrder = function (req, res) {
   });
 };
 
+ // NEW ORDER ENDPOINT
 exports.addOrder2 = async function (req, res) {
   res.set("Content-Type", "application/json");
 
