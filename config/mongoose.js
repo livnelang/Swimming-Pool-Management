@@ -23,6 +23,7 @@ module.exports = function () {
     require('../server/models/client.model');
     require('../server/models/order.model');
     require('../server/models/appUser.model');
+    require('../server/models/product.model');
 
     //Return the Mongoose connection instance
     return db;

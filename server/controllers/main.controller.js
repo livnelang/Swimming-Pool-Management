@@ -9,6 +9,9 @@ var Clients = require("mongoose").model("Client");
 //Orders model
 var Orders = require("mongoose").model("Order");
 
+//Products model
+var Products = require("mongoose").model("Product");
+
 /**
  * addClient
  * creates new client
@@ -57,9 +60,42 @@ exports.getAllClients = function (req, res) {
   });
 };
 
+exports.getAllProducts = function (req, res) {
+  res.set("Content-Type", "application/json");
+  Products.find({}, function (err, products) {
+    if (!err) {
+      res.status(200).json(products);
+    } else {
+      res.status(500).json(err);
+    }
+  });
+};
+
 exports.addOrder = function (req, res) {
   res.set("Content-Type", "application/json");
   var newOrder = new Orders(req.body.newOrder);
+  newOrder.save(function (err, new_doc) {
+    if (!err) {
+      res.json(new_doc);
+    } else {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  });
+};
+
+exports.addOrder2 = async function (req, res) {
+  res.set("Content-Type", "application/json");
+
+  const { productId, ...partialOrder } = req.body.newOrder;
+  const product = await Products.findById(productId);
+
+  const newOrder = new Orders({
+    ...partialOrder,
+    pricePerProduct: product.price,
+    productName: product.name
+  });
+
   newOrder.save(function (err, new_doc) {
     if (!err) {
       res.json(new_doc);

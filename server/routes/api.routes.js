@@ -50,6 +50,11 @@ module.exports = function(app) {
     app.post('/api/deleteOrder', clients.deleteOrder);
     app.post('/api/getClients', clients.getClients);
     app.post('/api/getAllClients', clients.getAllClients);
+    app.post('/api/getAllProducts', clients.getAllProducts);
     app.post('/api/getOrders', clients.getOrders);
     app.post('/api/sendMonthlyOrdersByEmail', clients.sendMonthlyOrdersByEmail);
+
+
+    /* V2 */
+    app.post('/api/addOrder2', clients.addOrder2);
 };
