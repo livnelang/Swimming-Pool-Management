@@ -7,6 +7,14 @@ var clientSchema = new Schema({
     lastName: {type: String, required : true, index: true}
 },{collection: 'clients'});
 
+clientSchema.set('toJSON', {
+    transform: function (doc, ret, options) {
+        ret.id = ret._id;
+        delete ret._id;
+        delete ret.__v;
+    }
+}); 
+
 // Unique indexes
 clientSchema.index({firstName: 1, lastName: 1}, {unique: true});
 
