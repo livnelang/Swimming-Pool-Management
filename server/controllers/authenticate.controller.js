@@ -29,7 +29,7 @@ exports.authenticate = function (req,res)  {
                     admin: user.admin
                 };
                 var token = jwt.sign(payload, req.app.get('superSecret'), {
-                    expiresIn: 1440 // expires in 24 hours
+                    expiresIn: 1800 // expires in 30 minutes
                 });
 
                 // return the information including token as JSON
