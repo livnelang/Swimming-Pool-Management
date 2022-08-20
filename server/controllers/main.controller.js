@@ -84,17 +84,21 @@ exports.addOrder = function (req, res) {
   });
 };
 
- // NEW ORDER ENDPOINT
+// NEW ORDER ENDPOINT
 exports.addOrder2 = async function (req, res) {
   res.set("Content-Type", "application/json");
 
-  const { productId, ...partialOrder } = req.body.newOrder;
+  const { productId, clientId, ...partialOrder } = req.body;
   const product = await Products.findById(productId);
+
+  const client = await Clients.findById(clientId);
 
   const newOrder = new Orders({
     ...partialOrder,
     pricePerProduct: product.price,
-    productName: product.name
+    productName: product.name,
+    firstName: client.firstName,
+    lastName: client.lastName,
   });
 
   newOrder.save(function (err, new_doc) {
@@ -182,7 +186,7 @@ exports.sendMonthlyOrdersByEmail = async function (req, res) {
   }));
 
   //convert the data to CSV with the column names
-  const csv = parse(data, {withBOM: true});
+  const csv = parse(data, { withBOM: true });
   const base64CSV = Buffer.from(csv).toString("base64");
 
   const SibApiV3Sdk = require("sib-api-v3-sdk");
@@ -226,7 +230,7 @@ exports.sendMonthlyOrdersByEmail = async function (req, res) {
   }
 
   let attachmentName = `${mailsDetails.dateText} בריכה.csv`;
-  attachmentName = attachmentName.replace(/ /g, '_');
+  attachmentName = attachmentName.replace(/ /g, "_");
 
   sendSmtpEmail.attachment = [
     {
@@ -251,7 +255,7 @@ exports.sendMonthlyOrdersByEmail = async function (req, res) {
       res.status(500).json({ message: error });
     }
   );
-  };
+};
 
 async function getClientMonthOrder(orderFilter) {
   return Orders.aggregate(
