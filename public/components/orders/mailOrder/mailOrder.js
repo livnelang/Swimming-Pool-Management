@@ -12,12 +12,18 @@ myApp.controller("mailOrderController", [
         defaultMail: $scope.mainMail,
         ownerMail: $scope.ownerMail,
         accountantMail: $scope.accountantMail,
+      };
+
+      const body = {
+        formObject: $scope.formObject,
+        mailsDetails: mailsDetails,
+        subjectPrefix:  $scope.title,
         dateText: formattedDate,
       };
 
       $scope.isLoading = true;
       apiService
-        .sendOrdersByMail($scope.formObject, mailsDetails, $scope.title)
+        .sendOrdersByMail(body)
         .then((res) => {
           $scope.mailStatus = 200;
           $scope.mailResponseHeader = "המייל נשלח בהצלחה!";

@@ -206,7 +206,7 @@ exports.sendMonthlyOrdersByEmail = async function (req, res) {
   };
 
   sendSmtpEmail.to = [];
-  const mailsDetails = req.body.mailsDetails;
+  const { mailsDetails, dateText } = req.body;
 
   if (mailsDetails.defaultMail) {
     sendSmtpEmail.to.push({
@@ -229,7 +229,7 @@ exports.sendMonthlyOrdersByEmail = async function (req, res) {
     });
   }
 
-  let attachmentName = `${mailsDetails.dateText} בריכה.csv`;
+  let attachmentName = `${dateText} בריכה.csv`;
   attachmentName = attachmentName.replace(/ /g, "_");
 
   sendSmtpEmail.attachment = [
@@ -241,7 +241,7 @@ exports.sendMonthlyOrdersByEmail = async function (req, res) {
 
   sendSmtpEmail.templateId = 3;
   sendSmtpEmail.params = {
-    dateText: mailsDetails.dateText,
+    dateText: dateText,
   };
   apiInstance.sendTransacEmail(sendSmtpEmail).then(
     function (data) {

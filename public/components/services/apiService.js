@@ -53,15 +53,11 @@ myApp
                     }
                 });
             },
-            sendOrdersByMail:function(formObject, mailsDetails, subjectPrefix){
+            sendOrdersByMail:function(body){
                 return $http({
                     method: "POST",
                     url: "/api/sendMonthlyOrdersByEmail",
-                    data: {
-                        formObject: formObject,
-                        mailsDetails: mailsDetails,
-                        subjectPrefix: subjectPrefix
-                    }
+                    data: body
                 });
             },
             upsert:function (item) {
