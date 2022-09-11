@@ -185,6 +185,10 @@ exports.sendMonthlyOrdersByEmail = async function (req, res) {
     "בירה =10 ₪": "",
   }));
 
+  if (data.length === 0) {
+    return res.status(500).json({ message: "לא ניתן לשלוח מייל ללא רשומות" });
+  }
+
   //convert the data to CSV with the column names
   const csv = parse(data, { withBOM: true });
   const base64CSV = Buffer.from(csv).toString("base64");
