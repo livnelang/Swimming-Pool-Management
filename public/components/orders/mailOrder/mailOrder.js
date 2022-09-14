@@ -9,9 +9,9 @@ myApp.controller("mailOrderController", [
     $scope.title = `כל הלקוחות - ${formattedDate}`;
     $scope.handleClickSendMail = () => {
       const mailsDetails = {
-        defaultMail: $scope.mainMail,
-        ownerMail: $scope.ownerMail,
-        accountantMail: $scope.accountantMail,
+        defaultMailAddress: $scope.defaultMailAddress,
+        ownerMailAddress: $scope.ownerMailAddress,
+        extraAccountantMail: $scope.extraAccountantMail,
       };
 
       const body = {

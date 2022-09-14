@@ -3,23 +3,23 @@
   <form name="mailForm" ng-submit="handleClickSendMail()">
     <h4>למי לשלוח?</h4>
     <div class="form-group">
-      <input ng-model="mainMail" type="checkbox" name="mainMail" ng-init="mainMail=false"/>
-      <label for="mainMail">מש"א - {{$root.defaultMailAddress}}</label>
+      <input ng-model="defaultMailAddress" type="checkbox" name="defaultMailAddress" ng-init="defaultMailAddress=false"/>
+      <label for="defaultMailAddress">מש"א - {{$root.defaultMailAddress}}</label>
     </div>
 
     <div class="form-group">
-      <input ng-model="ownerMail" type="checkbox" name="ownerMail" ng-init="ownerMail=false"/>
-      <label for="ownerMail">עוז נוי - {{$root.ownerMailAddress}}</label>
+      <input ng-model="ownerMailAddress" type="checkbox" name="ownerMailAddress" ng-init="ownerMailAddress=false"/>
+      <label for="ownerMailAddress">עוז נוי - {{$root.ownerMailAddress}}</label>
     </div>
     <div class="form-group">
-      <input ng-model="accountantMail" type="checkbox" name="accountantMail" ng-init="accountantMail=false"/>
-      <label for="accountantMail">מיכל הנה"ח - {{$root.extraAccountantMail}}</label>
+      <input ng-model="extraAccountantMail" type="checkbox" name="extraAccountantMail" ng-init="extraAccountantMail=false"/>
+      <label for="extraAccountantMail">מיכל הנה"ח - {{$root.extraAccountantMail}}</label>
     </div>
 
     <button
       type="submit"
       class="btn btn-success showOrdersButton sendMailsButton"
-      ng-disabled="mailForm.$invalid || (!mainMail && !ownerMail && !accountantMail) || isLoading"
+      ng-disabled="mailForm.$invalid || (!defaultMailAddress && !ownerMailAddress && !extraAccountantMail) || isLoading"
     >
       שלח
     </button>

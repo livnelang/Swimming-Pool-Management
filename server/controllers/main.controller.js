@@ -212,21 +212,21 @@ exports.sendMonthlyOrdersByEmail = async function (req, res) {
   sendSmtpEmail.to = [];
   const { mailsDetails, dateText } = req.body;
 
-  if (mailsDetails.defaultMail) {
+  if (mailsDetails.defaultMailAddress) {
     sendSmtpEmail.to.push({
       email: process.env.DEFAULT_MAIL_ADDRESS,
       name: 'מש"א',
     });
   }
 
-  if (mailsDetails.ownerMail) {
+  if (mailsDetails.ownerMailAddress) {
     sendSmtpEmail.to.push({
       email: process.env.OWNER_MAIL_ADDRESS,
       name: "עוז נוי",
     });
   }
 
-  if (mailsDetails.accountantMail) {
+  if (mailsDetails.extraAccountantMail) {
     sendSmtpEmail.to.push({
       email: process.env.EXTRA_ACCOUNTANT_MAIL,
       name: 'מיכל הנה"ח',
