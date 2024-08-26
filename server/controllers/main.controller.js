@@ -182,7 +182,7 @@ exports.sendMonthlyOrdersByEmail = async function (req, res) {
     "סכום רכישה חודשי": row.totalSaleAmount,
     "": "",
     "קולה/קרטיב =4 ₪": "",
-    "בירה =10 ₪": "",
+    "בירה =11 ₪": "",
   }));
 
   if (data.length === 0) {
