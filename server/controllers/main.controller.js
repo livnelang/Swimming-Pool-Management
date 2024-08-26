@@ -233,6 +233,13 @@ exports.sendMonthlyOrdersByEmail = async function (req, res) {
     });
   }
 
+  if (mailsDetails.owner2MailAddress) {
+    sendSmtpEmail.to.push({
+      email: process.env.OWNER2_MAIL_ADDRESS,
+      name: 'ליבנה בדיקה',
+    });
+  }
+
   let attachmentName = `${dateText} בריכה.csv`;
   attachmentName = attachmentName.replace(/ /g, "_");
 
