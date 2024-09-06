@@ -14,7 +14,7 @@ var app = express();
 var server = require('http').createServer(app);
 
 // Set The Port
-app.set('port', process.env.PORT || 3000);
+app.set('port', 8080);
 
 // Start the server
 server.listen(app.get('port'), function() {
